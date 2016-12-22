@@ -107,7 +107,9 @@
       scope.$watch('fieldRequired', function(newval, oldval) {
         if (newval !== oldval) {
           if (!newval) {
-            ctrl[scope.inputName].$setValidity(requiredClassName, true);
+            $timeout(function() {
+              ctrl[scope.inputName].$setValidity(requiredClassName, true);
+            });
           }
           else if (!validState || scope.currentIndex === -1) {
             handleRequired(false);
@@ -239,7 +241,9 @@
         scope.notEmpty = valid;
         validState = scope.searchStr;
         if (scope.fieldRequired && ctrl && scope.inputName) {
-          ctrl[scope.inputName].$setValidity(requiredClassName, valid);
+          $timeout(function() {
+            ctrl[scope.inputName].$setValidity(requiredClassName, valid);
+          });
         }
       }
 
